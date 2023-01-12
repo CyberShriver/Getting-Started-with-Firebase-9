@@ -1,3 +1,18 @@
+ <style>
+  body{
+    display: flex;
+  }
+  td,tr{
+    border:none;
+  }
+  button{
+    float:right;
+  }
+  #content{
+    margin:0 auto;
+    justify-content: center;
+  }
+ </style>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,7 +21,44 @@
   <title>Firebase 9</title>
 </head>
 <body>
-  <h1>Firebase 9 project</h1>
+  <div id="content">
+  <h1> Firebase 9 project </h1>
+
+  <form action="" class="addForm">
+    <fieldset>
+    <legend>Add form</legend>
+    <table>
+      <tr>
+        <td><label for="">Title</label> </td>
+        <td><input type="text" name="title"></td>
+      </tr>
+      <tr>
+        <td><label for="">Author</label> </td>
+        <td><input type="text" name="author"></td>
+      </tr>
+      <tr>
+        <td><button id="AddButton">Add</button></td>
+      </tr>
+    </table>
+    </fieldset>
+  </form>
+
+<form action="" class="deletForm">
+  <fieldset>
+  <legend>delete form</legend>
+  <table>
+    <tr>
+      <td><label for="">id</label></td>
+       <td> <input type="text" name="id"> </td>
+    </tr>
+    <tr>
+      <td><button id="delButton">delete</button></td>
+    </tr>
+  </table>
+</form>
+</fieldset>
+</div>
+
 
   <script src="bundle.js"></script>
 </body>
