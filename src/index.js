@@ -1,6 +1,6 @@
 import {initializeApp} from "firebase/app"
 import {
- getFirestore,collection,getDoc, getDocs, addDoc, doc, deleteDoc, onSnapshot, query, where, orderBy, serverTimestamp
+ getFirestore,collection,getDoc, getDocs, addDoc, doc, deleteDoc, onSnapshot, query, where, orderBy, serverTimestamp,updateDoc
 } from "firebase/firestore"
 
 // ===== configuration =================
@@ -61,13 +61,13 @@ const colDoc=doc(db,"books","T6N3cQGEuSxj0QEnUgvU")
 
 // ***  not real time one document ***
 // getDoc(colDoc,(doc)=>{
-//     console.log(doc.data());
+//     console.log(doc.data(),doc.id);
 // })
 
 //**** on realtime one document *******
 
 onSnapshot(colDoc,doc=>{
-    console.log(doc.data());
+    console.log(doc.data(),doc.id);
 })
 
 // add document
@@ -94,6 +94,20 @@ deletBookForm.addEventListener('submit',(e)=>{
     const delDoc=doc(db,'books',deletBookForm.id.value)
     deleteDoc(delDoc).then(
        deletBookForm.reset() 
+    )
+}
+)
+
+// update document
+const updateBookForm=document.querySelector(".updateForm")
+updateBookForm.addEventListener('submit',(e)=>{
+    e.preventDefault();
+
+    const updDoc=doc(db,'books',updateBookForm.id.value)
+    updateDoc(updDoc,{
+        title:"book title is update"
+    }).then(
+       updateBookForm.reset() 
     )
 }
 )
