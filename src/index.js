@@ -2,6 +2,9 @@ import {initializeApp} from "firebase/app"
 import {
  getFirestore,collection,getDoc, getDocs, addDoc, doc, deleteDoc, onSnapshot, query, where, orderBy, serverTimestamp,updateDoc
 } from "firebase/firestore"
+import {
+    getAuth,createUserWithEmailAndPassword
+} from "firebase/auth"
 
 // ===== configuration =================
 const firebaseConfig = {
@@ -20,6 +23,7 @@ initializeApp(firebaseConfig);
 //******** init service (initialize the db) *********
 
 const db=getFirestore()
+const auth=getAuth()
 
 //*************/ get collection reference *********
 
@@ -111,3 +115,21 @@ updateBookForm.addEventListener('submit',(e)=>{
     )
 }
 )
+
+// create user
+
+const loginForm=document.querySelector(".login")
+loginForm.addEventListener("submit",(e)=>{
+    e.preventDefault()
+ 
+    const email=loginForm.email.value
+    const password=loginForm.password.value
+ createUserWithEmailAndPassword(auth,email,password)
+ .then(cred=>{
+    console.log("user created:",cred.user);
+    loginForm.reset();
+ })
+ .catch(err=>{
+    console.log(err.message);
+ })
+})
