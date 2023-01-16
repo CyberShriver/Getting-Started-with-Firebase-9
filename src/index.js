@@ -3,7 +3,7 @@ import {
  getFirestore,collection,getDoc, getDocs, addDoc, doc, deleteDoc, onSnapshot, query, where, orderBy, serverTimestamp,updateDoc
 } from "firebase/firestore"
 import {
-    getAuth,createUserWithEmailAndPassword
+    getAuth,createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged
 } from "firebase/auth"
 
 // ===== configuration =================
@@ -51,7 +51,7 @@ const q=query(colRef,orderBy("createdAt"))
 
 // ========= get data in realtime using onSnapShot ===========
 
-onSnapshot(q,(snapshot)=>{
+const UnsubAlldata=onSnapshot(q,(snapshot)=>{
     let books=[]
     snapshot.docs.forEach(doc=>{
         books.push({...doc.data(),id:doc.id})
@@ -70,7 +70,7 @@ const colDoc=doc(db,"books","T6N3cQGEuSxj0QEnUgvU")
 
 //**** on realtime one document *******
 
-onSnapshot(colDoc,doc=>{
+const unSubDat=onSnapshot(colDoc,doc=>{
     console.log(doc.data(),doc.id);
 })
 
@@ -118,18 +118,60 @@ updateBookForm.addEventListener('submit',(e)=>{
 
 // create user
 
-const loginForm=document.querySelector(".login")
-loginForm.addEventListener("submit",(e)=>{
+const signUpForm=document.querySelector(".login")
+signUpForm.addEventListener("submit",(e)=>{
     e.preventDefault()
  
-    const email=loginForm.email.value
-    const password=loginForm.password.value
+    const email=signUpForm.email.value
+    const password=signUpForm.password.value
  createUserWithEmailAndPassword(auth,email,password)
  .then(cred=>{
-    console.log("user created:",cred.user);
-    loginForm.reset();
+    // console.log("user created:",cred.user);
+    signUpForm.reset();
  })
  .catch(err=>{
     console.log(err.message);
  })
+})
+
+// login
+
+const LoginForm=document.querySelector(".loginUserForm")
+LoginForm.addEventListener("submit",(e)=>{
+    e.preventDefault()
+
+    const email=LoginForm.email.value
+    const password=LoginForm.password.value
+    signInWithEmailAndPassword(auth,email,password)
+        .then(cred=>{
+            // console.log("user logged:",cred.user);
+            LoginForm.reset()
+        })
+        .catch(err=>{
+            console.log(err.message);
+        })
+})
+
+// logout
+
+const logout=document.querySelector(".signOut")
+logout.addEventListener("click",()=>{
+    signOut(auth)
+    // console.log("user logged out");
+})
+
+// subscription
+const UnsubAuth=onAuthStateChanged(auth,(user)=>{
+ console.log("the state changed:",user);
+})
+
+// Unsubscription
+
+const Unsubscript=document.querySelector(".Unsubscription")
+Unsubscript.addEventListener("click",()=>{
+    console.log("Unsubscription");
+    UnsubAuth()
+    UnsubAlldata()
+    unSubDat()
+
 })

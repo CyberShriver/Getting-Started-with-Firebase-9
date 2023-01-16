@@ -23,7 +23,8 @@
 <body>
   <div id="content">
   <h1> Firebase 9 project </h1>
-
+ 
+  <h2>firestore</h2>
   <form action="" class="addForm">
     <fieldset>
     <legend>ADD FORM</legend>
@@ -55,8 +56,8 @@
       <td><button id="delButton">delete</button></td>
     </tr>
   </table>
-</form>
 </fieldset>
+</form>
 
 <form action="" class="updateForm">
   <fieldset>
@@ -70,10 +71,30 @@
         <td><button id="delButton">Update</button></td>
       </tr>
     </table>
+  </fieldset>
 </form>
-</fieldset>
 
+<h2>Auhentication</h2>
 <form action="" class="login">
+  <fieldset>
+    <legend>SIGN UP FORM</legend>
+    <table>
+      <tr>
+        <td><label for="">Email</label> </td>
+        <td><input type="mail" name="email"></td>
+      </tr>
+      <tr>
+        <td><label for="">Password</label> </td>
+        <td><input type="password" name="password"></td>
+      </tr>
+      <tr>
+        <td><button id="LoginButton">Sign up</button></td>
+      </tr>
+    </table>
+  </fieldset>
+</form>
+
+<form action="" class="loginUserForm">
   <fieldset>
     <legend>LOGIN FORM</legend>
     <table>
@@ -86,12 +107,14 @@
         <td><input type="password" name="password"></td>
       </tr>
       <tr>
-        <td><button id="LoginButton">Login</button></td>
+        <td><button id="LoginButton">Sign In</button></td>
       </tr>
     </table>
+  </fieldset>
 </form>
-</fieldset>
 
+<button class="Unsubscription">Unsubscription All</button>
+<button class="signOut">Sign out</button> 
 </div>
 
 
